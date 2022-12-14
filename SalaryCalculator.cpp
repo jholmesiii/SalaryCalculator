@@ -7,71 +7,91 @@ using namespace std;
 void main()
 {
 	// Declaration Section
-	char PayCode;
-	double Rate, Hours, NumPiece, Comm, Sales, Pay, Salary, EmpNum;
+	char payCode, payCodeLower, endSelection;
+	char endSelectionLower = 'y';
+	double rate, hours, numberOfPieces, commission, sales, pay, salary, employeeNumber;
 
-	// Input Section
-	cout << "What is the employee's number?" << endl;
-	cout << "Enter 0 to quit" << endl;
-	cin >> EmpNum;
+	do{
+		// Input Section
+		cout << "What is the employee's number?" << endl;
+		cin >> employeeNumber;
 
-	while (EmpNum > 0)
-	{
 		cout << "Enter the employee's pay code" << endl;
 		cout << "  H = Hourly" << endl;
 		cout << "  P = Piece Work" << endl;
 		cout << "  C = Commission" << endl;
 		cout << "  S = Salary" << endl;
-		cout << "Enter your choice: ";
-		cin >> PayCode;
+		cout << "Enter your selection: ";
+		cin >> payCode;
 
-		switch (PayCode)
+		payCodeLower = tolower(payCode);
+
+		if (payCodeLower != 'h' && payCodeLower != 'p' && payCodeLower != 'c' && payCodeLower != 's') {
+			do {
+				cout << "\nBad input.\n";
+				cout << "Enter the employee's pay code" << endl;
+				cout << "  H = Hourly" << endl;
+				cout << "  P = Piece Work" << endl;
+				cout << "  C = Commission" << endl;
+				cout << "  S = Salary" << endl;
+				cout << "Enter your selection: ";
+				cin >> payCode;
+				payCodeLower = tolower(payCode);
+			} while (payCodeLower != 'h' && payCodeLower != 'p' && payCodeLower != 'c' && payCodeLower != 's');
+		}
+
+		switch (payCodeLower)
 		{
-		case 'H':
 		case 'h':
 			cout << "What is the employee's pay rate?" << endl;
-			cin >> Rate;
+			cin >> rate;
 			cout << "How many hours did the employee work?" << endl;
-			cin >> Hours;
-			Pay = Rate * Hours;
+			cin >> hours;
+			pay = rate * hours;
 			break;
-		case 'P':
 		case 'p':
 			cout << "What is the employee's pay rate?" << endl;
-			cin >> Rate;
+			cin >> rate;
 			cout << "How many pieces did the employee make?" << endl;
-			cin >> NumPiece;
-			Pay = NumPiece * Rate;
+			cin >> numberOfPieces;
+			pay = numberOfPieces * rate;
 			break;
-		case 'C':
 		case 'c':
 			cout << "What is the employee's commission rate?" << endl;
-			cin >> Comm;
+			cin >> commission;
 			cout << "What is the dollar value of the employee's sales?" << endl;
-			cin >> Sales;
-			Pay = (Comm / 100) * Sales;
+			cin >> sales;
+			pay = (commission/ 100) * sales;
 			break;
-		case 'S':
 		case 's':
 			cout << "What is the employee's salary?" << endl;
-			cin >> Salary;
-			Pay = Salary;
+			cin >> salary;
+			pay = salary;
 			break;
 		default:
 			cout << "Please enter a valid selection." << endl;
-			Pay = 0.0;
+			pay = 0.0;
 		}
 
-		if (Pay > 0.0)
-		{
-			cout << "Pay = $" << Pay << endl;
-			cout << "" << endl;
-		}
+		cout << "Employee #" << employeeNumber << " Pay = $" << pay << endl;
+		cout << "" << endl;
 
-		cout << "What is the employee's number?" << endl;
-		cout << "Enter 0 to quit" << endl;
-		cin >> EmpNum;
-	}
+		cout << "Enter another employee?" << endl;
+		cout << "Enter Y for Yes or N for No" << endl;
+		cin >> endSelection;
+
+		endSelectionLower = tolower(endSelection);
+
+		if (endSelectionLower != 'y' && endSelectionLower != 'n') {
+			do {
+				cout << "\nBad input. Please use Y for Yes or N for No\n";
+				cin >> endSelection;
+				endSelectionLower = tolower(endSelection);
+			} while (endSelectionLower != 'y' && endSelectionLower != 'n');
+		}
+	} while (endSelectionLower == 'y');
+
+	cout << "\nThank You\n";
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
